@@ -21,7 +21,7 @@ class OperativeBinary(object):
     def __init__(self):
         self.meta = {
             'author': 'Tristan Granier',
-            'description': 'Run module single module'
+            'description': 'Run single module'
         }
         self.directory = os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0]
         if error == 1:
