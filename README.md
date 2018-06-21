@@ -27,7 +27,7 @@ $ cd client
 $ npm install
 $ cd ..
 $ cd bin
-$ sudo ./opf_users
+$ sudo ./opf_users.py
 $ create operative mypass
 $ cd ..
 open two shell
