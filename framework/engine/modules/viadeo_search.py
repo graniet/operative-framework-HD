@@ -42,7 +42,6 @@ class module_element(object):
     def get_options(self, name):
         for argument in self.require:
             if argument['name'] == name:
-                print argument
                 return argument['value']
 
     def generate_unique_id(self, size=6, chars=string.ascii_uppercase + string.digits):

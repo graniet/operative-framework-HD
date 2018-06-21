@@ -15,6 +15,8 @@ echo -e "binary copied ${GREEN} /usr/local/bin/opf_client ${COLOR_OFF}"
 cp bin/opf_console.py /usr/local/bin/opf_console
 echo -e "binary copied ${GREEN} /usr/local/bin/opf_console ${COLOR_OFF}"
 cp bin/opf_server.py /usr/local/bin/opf_server
+echo -e "binary copied ${GREEN} /usr/local/bin/opf_single ${COLOR_OFF}"
+cp bin/opf_single.py /usr/local/bin/opf_single
 echo -e "binary copied ${GREEN} /usr/local/bin/opf_server ${COLOR_OFF}"
 cp bin/opf_users.py /usr/local/bin/opf_users
 echo -e "binary copied ${GREEN} /usr/local/bin/opf_users ${COLOR_OFF}"
