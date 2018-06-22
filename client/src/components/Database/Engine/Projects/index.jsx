@@ -92,7 +92,7 @@ class EngineProjects extends React.Component{
             })
     }
 
-    static insertProjectElementFrom(project_id, element_type, element_text, from_text){
+    static insertProjectElementFrom(project_id, element_type, element_text, from_text, group_by){
         const userToken = localStorage.getItem('operativeAuthToken');
         const userApp = localStorage.getItem('operativeApp');
         return axios.post(SERVER_ADDR + '/project/insert', {
@@ -101,7 +101,8 @@ class EngineProjects extends React.Component{
             'project_id': project_id,
             'element_type': element_type,
             'element_text': element_text,
-            'linked_from': from_text
+            'linked_from': from_text,
+            'group_by': group_by
         })
             .then(res => {
                 return res.data

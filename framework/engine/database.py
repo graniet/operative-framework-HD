@@ -707,14 +707,48 @@ class Engine(object):
         collection_subject = self.database.projects_elements
         checked = 0
         for key, subject in enumerate(element_list):
+            found = 0
             if subject['linked_from'] != "" and subject['name'] not in already_checked:
                 check_if_linked = collection_subject.find({'linked_from': subject['name'], 'project_id': project_id, 'element_type': 'subject'}, {'_id': False})
                 if check_if_linked.count() < 1:
                     checked = 1
                     linked_from_key = self.find_linked_from_key(element_list, subject['linked_from'])
                     if linked_from_key != "error_string":
-                        element_list[linked_from_key]['children'].append(subject)
-                        already_checked.append(subject['name'])
+                        if subject['group_by'] == "":
+                            if not self.find_name(element_list[linked_from_key]['children'], subject['name']):
+                                element_list[linked_from_key]['children'].append(subject)
+                        else:
+                            if len(element_list[linked_from_key]['children']) > 0:
+                                for el in element_list[linked_from_key]['children']:
+                                    if el['name'] == subject['group_by']:
+                                        if not self.find_name(el['children'], subject['name']):
+                                            el['children'].append(subject)
+                                            found = 1
+
+                                if found == 0:
+                                    if not self.find_name(element_list[linked_from_key]['children'],
+                                                          subject['group_by']):
+                                        element_list[linked_from_key]['children'].append(
+                                            {
+                                                'name': subject['group_by'],
+                                                'children': []
+                                            })
+                                    for el in element_list[linked_from_key]['children']:
+                                        if el['name'] == subject['group_by']:
+                                            if subject not in el['children']:
+                                                el['children'].append(subject)
+                            else:
+                                if not self.find_name(element_list[linked_from_key]['children'], subject['group_by']):
+                                    element_list[linked_from_key]['children'].append(
+                                        {
+                                            'name': subject['group_by'],
+                                            'children': []
+                                        })
+                                for el in element_list[linked_from_key]['children']:
+                                    if el['name'] == subject['group_by']:
+                                        if subject not in el['children']:
+                                            el['children'].append(subject)
+                        already_checked.append(subject['name'] + "_" + subject['element_id'])
                         del element_list[key]
                     else:
                         self.write_log(log_text="Can't find a parent '"+str(subject['linked_from'])+"' for '" + str(subject['name']) + "'", element_name="web.py")
@@ -722,15 +756,67 @@ class Engine(object):
                 else:
                     can_put = True
                     for element in check_if_linked:
-                        if element['element_text']['text'] not in already_checked:
+                        if element['element_text']['text'] + "_" + element['element_id'] not in already_checked:
+                            linked_from_key = self.find_linked_from_key(element_list, subject['linked_from'])
+                            if subject['group_by'] == "":
+                                checked = 1
+                                can_put = False
+                            elif len(element_list[linked_from_key]['children']) > 0:
+                                for el in element_list[linked_from_key]['children']:
+                                    if el['name'] == subject['group_by']:
+                                        if subject not in el['children']:
+                                            el['children'].append(subject)
+                                            found = 1
+                                if found == 0:
+                                    if not self.find_name(element_list[linked_from_key]['children'], subject['group_by']):
+                                        element_list[linked_from_key]['children'].append(
+                                            {
+                                                'name': subject['group_by'],
+                                                'children': []
+                                            })
+                                    for el in element_list[linked_from_key]['children']:
+                                        if el['name'] == subject['group_by']:
+                                            if not self.find_name(el['children'], subject['name']):
+                                                el['children'].append(subject)
+                            else:
+                                if not self.find_name(element_list[linked_from_key]['children'], subject['group_by']):
+                                    element_list[linked_from_key]['children'].append(
+                                        {
+                                            'name': subject['group_by'],
+                                            'children': []
+                                        })
+                                for el in element_list[linked_from_key]['children']:
+                                    if el['name'] == subject['group_by']:
+                                        if not self.find_name(el['children'], subject['name']):
+                                            el['children'].append(subject)
                             checked = 1
                             can_put = False
                     if can_put:
                         linked_from_key = self.find_linked_from_key(element_list, subject['linked_from'])
                         if linked_from_key != "error_string":
                             del element_list[key]
-                            element_list[linked_from_key]['children'].append(subject)
-                            already_checked.append(subject['name'])
+                            if subject['group_by'] == "":
+                                element_list[linked_from_key]['children'].append(subject)
+                            else:
+                                if len(element_list[linked_from_key]['children']) > 0:
+                                    for el in element_list[linked_from_key]['children']:
+                                        if el['name'] == subject['group_by']:
+                                            if not self.find_name(el['children'], subject['name']):
+                                                el['children'].append(subject)
+                                else:
+                                    if not self.find_name(element_list[linked_from_key]['children'],
+                                                          subject['group_by']):
+                                        element_list[linked_from_key]['children'].append(
+                                            {
+                                                'name': subject['group_by'],
+                                                'children': []
+                                            })
+                                    for el in element_list[linked_from_key]['children']:
+                                        if el['name'] == subject['group_by']:
+                                            if subject not in el['children']:
+                                                el['children'].append(subject)
+
+                            already_checked.append(subject['name'] + "_" + subject['element_id'])
         if checked == 1:
             new_list = element_list
             self.get_linked_from(element_list=element_list, already_checked=already_checked, new_list=new_list, project_id=project_id)
@@ -739,11 +825,48 @@ class Engine(object):
                 if sub['linked_from'] != "":
                     keys = self.find_linked_from_key(element_list, sub['linked_from'])
                     if keys != "error_string":
-                        new_list[keys]['children'].append(sub)
-                        del new_list[key]
+                        if not self.find_name(new_list[keys]['children'], sub['name']):
+                            new_list[keys]['children'].append(sub)
+                            del new_list[key]
             if len(new_list) == 0:
                 new_list = element_list
+            self.final_checking(new_list, "base")
             self.three_template = new_list
+
+
+    def get_element_by_name(self, listing, name):
+        for element in listing:
+            if element['name'] == name:
+                return element
+        return False
+
+    def final_checking(self, listing, name):
+        for key, element in enumerate(listing):
+            if "group_by" in element:
+                if self.find_name(object_list=listing, name=element['group_by']) and element['group_by'] != name:
+                    getting = self.get_element_by_name(listing, element['group_by'])
+                    if "children" in getting:
+                        found = 0
+                        for childs in getting['children']:
+                            if childs['name'] == element['name']:
+                                found = 1
+                                del listing[key]
+                        if found == 0:
+                            getting['children'].append(element)
+                            del listing[key]
+
+            if "children" in element:
+                if len(element['children']) > 0:
+                    self.final_checking(element['children'], element['name'])
+
+
+
+
+    def find_name(self, object_list, name):
+        for element in object_list:
+            if element['name'] == name:
+                return True
+        return False
 
     def generate_linked(self, app_id, project_id):
         element_list = []
@@ -752,6 +875,9 @@ class Engine(object):
             {'project_id': project_id, 'app_id': app_id, 'element_type': "subject"}, {"_id": False})
         select_subjects = list(select_subjects)
         for subject in select_subjects:
+            group_by = ""
+            if "group_by" in subject:
+                group_by = subject['group_by']
             template = {
                 'name': subject['element_text']['text'],
                 'element_id': subject['element_id'],
@@ -759,6 +885,7 @@ class Engine(object):
                     'type': subject['element_text']['type']
                 },
                 'linked_from': subject['linked_from'],
+                'group_by': group_by,
                 'children': []
             }
             template['nodeSvgShape'] = {}
@@ -985,12 +1112,21 @@ class Engine(object):
                 'status': "forbidden"
             }
 
+        linked_from = ""
+        if "linked_from" in post_data:
+            linked_from = post_data['linked_from']
+
+        group_by = ""
+        if "group_by" in post_data:
+            group_by = post_data['group_by']
+
         collection_element = self.database.projects_elements
         check_exist = collection_element.find({
             'project_id': project_id,
             'app_id': app_id,
             'element_type': element_type,
-            'element_text': element_text
+            'element_text': element_text,
+            'linked_from': linked_from
         })
         if check_exist.count() > 0:
             return {
@@ -998,17 +1134,14 @@ class Engine(object):
                 'status': "forbidden"
             }
 
-        linked_from = ""
-        if "linked_from" in post_data:
-            linked_from = post_data['linked_from']
-
         collection_element.insert({
             'project_id': project_id,
             'app_id': app_id,
             'linked_from': linked_from,
             'element_type': element_type,
             'element_text': element_text,
-            'element_id': self.random_element(size=6, prefix=project_id + "_" + app_id + "_")
+            'element_id': self.random_element(size=6, prefix=project_id + "_" + app_id + "_"),
+            'group_by': group_by
         })
 
         return {

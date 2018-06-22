@@ -47,8 +47,11 @@ def main():
                         module_class.main()
                         if len(module_class.export) > 0:
                             if len(module_class.export[0]) > 0:
+                                group_by = ""
+                                if "group_by" in module_class.meta:
+                                    group_by = module_class.meta['group_by']
                                 collection.update({"task_id": options.session_id}, {
-                                    '$set': {"results": module_class.export, 'status': "executed", "error_msg": ""}})
+                                    '$set': {"results": module_class.export, 'status': "executed", "error_msg": "", "group_by": group_by}})
                             else:
                                 collection.update({"task_id": options.session_id}, {
                                     '$set': {"results": module_class.export, 'status': "empty", "error_msg": ""}})

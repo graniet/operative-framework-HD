@@ -215,7 +215,7 @@ class Projects extends React.Component{
         EngineProjects.removeProject(project_id)
             .then(res => {
                 if(res.status !== undefined){
-                    if(res.status == "success"){
+                    if(res.status === "success"){
                         this.setState({
                             'userMessage': 'Project successfully deleted',
                             'userStatus': 'positive'
@@ -1450,7 +1450,8 @@ export class ViewProjectTask extends React.Component{
             'note_text': '',
             'subject_new_type':'email',
             'waiting_subject_type':'',
-            'task_information': {}
+            'task_information': {},
+            'group_by': ''
         };
 
         EngineProjects.loadProjects(props.match.params.projectId)
@@ -1491,7 +1492,8 @@ export class ViewProjectTask extends React.Component{
                         this.setState({
                             'task': res.task,
                             'task_results': result_task,
-                            'task_results_nb': result_task.length
+                            'task_results_nb': result_task.length,
+                            'group_by': res.task.group_by
                         })
                     }
                 }
@@ -1515,12 +1517,13 @@ export class ViewProjectTask extends React.Component{
         this.insertNote = this.insertNote.bind(this);
         this.moduleOutput = this.moduleOutput.bind(this);
         this.onSelectTxt = this.onSelectTxt.bind(this);
+        this.setGroupBy = this.setGroupBy.bind(this);
     }
 
     insertSubject(){
         let element = document.getElementById('addSubject');
         element.classList.add('loading');
-        EngineProjects.insertProjectElementFrom(this.state.project_id,"subject", {"text": this.state.subject_new, "type": this.state.subject_new_type}, this.state.task.project_subject)
+        EngineProjects.insertProjectElementFrom(this.state.project_id,"subject", {"text": this.state.subject_new, "type": this.state.subject_new_type}, this.state.task.project_subject, this.state.group_by)
             .then(res => {
                 if(res.status !== undefined){
                     if(res.status === "forbidden"){
@@ -1576,7 +1579,7 @@ export class ViewProjectTask extends React.Component{
     insertNote(){
         let element = document.getElementById('addNote');
         element.classList.add('loading');
-        EngineProjects.insertProjectElement(this.state.project_id,"note", {"subject": this.state.subject_new, "subject_type": this.state.subject_new_type, "note_text": this.state.note_text, "task_id": this.state.task.task_id})
+        EngineProjects.insertProjectElement(this.state.project_id,"note", {"subject": this.state.subject_new, "subject_type": this.state.subject_new_type, "note_text": this.state.note_text, "task_id": this.state.task.task_id}, "")
             .then(res => {
                 if(res.status !== undefined){
                     if(res.status === "forbidden"){
@@ -1660,6 +1663,13 @@ export class ViewProjectTask extends React.Component{
     setDataSet(e){
         this.setState({
             'subject_new': e.target.dataset.value
+        })
+    }
+
+    setGroupBy(e){
+        console.log(e.target.value)
+        this.setState({
+            'group_by': e.target.value
         })
     }
 
@@ -1813,6 +1823,10 @@ export class ViewProjectTask extends React.Component{
                                     <option value="result">Result</option>
                                     <option value="Port">Port</option>
                                 </select>
+                            </div>
+                            <div className={"field"}>
+                                <label>Graphical grouping</label>
+                                <input type={"text"} placeholder={"software, headers, subdomains..."} onChange={this.setGroupBy} defaultValue={this.state.group_by}/>
                             </div>
                             <div className={"field"}>
                                 <textarea onChange={this.noteChange}>{noteText}</textarea>
