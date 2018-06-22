@@ -7,6 +7,7 @@ import Nav from '../Nav'
 import Module, {UseModule} from '../Module'
 import Tasks, { ViewTask } from '../Task'
 import Teams, { AddMember } from '../Teams'
+import ViewBreach from '../Breach'
 import Projects, { ViewProjectSubjects, ExportProjectXml, ExportProjectJson, AddProject, ViewProject, ViewProjectThree, ViewProjectTask } from '../Projects'
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
@@ -67,6 +68,7 @@ class App extends React.Component{
                             <RouteAuth exact path={"/project/:projectId/export/json"} component={ExportProjectJson}/>
                             <RouteAuth exact path={"/project/:projectId/export/xml"} component={ExportProjectXml}/>
                             <RouteAuth exact path={"/project/:projectId/subjects"} component={ViewProjectSubjects}/>
+                            <RouteAuth exact path={"/project/:projectId/breach"} component={ViewBreach}/>
                         </Switch>
                     </div>
                 </Container>

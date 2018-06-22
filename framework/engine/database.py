@@ -10,9 +10,20 @@ import hashlib
 import subprocess
 import datetime
 from pymongo import MongoClient, DESCENDING, errors
-from engine import config, display, session
+from engine import display, session
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
+error = 0
+try:
+    sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0])
+    from framework import config
+except:
+    error = 1
+try:
+    sys.path.insert(0, os.path.expanduser('~') + "/.operative_framework/")
+    from framework import config
+except:
+    error = 2
 
 
 class Engine(object):
@@ -40,6 +51,54 @@ class Engine(object):
             'Administrator',
             'Contributor'
         ]
+
+    def breach_information(self, post_data):
+        if "u_auth_token" not in post_data or "u_app_id" not in post_data:
+            return {
+                    'msg': "Please complete required field.",
+                    'status': "forbidden"
+                }
+        collection_searchable = self.database.public_breach_searchable.find({}, {'_id': False, 'searchable': True})
+        searchable = []
+        if collection_searchable.count() > 0:
+            for element in collection_searchable:
+                searchable.append(element['searchable'])
+
+        search_amount_of_results = self.database.public_breach_content.find({}).count()
+        return {
+            'status': 'success',
+            'msg': '',
+            'searchables': searchable,
+            'results': search_amount_of_results
+        }
+
+    def breach_search(self, post_data):
+        if "u_auth_token" not in post_data or "u_app_id" not in post_data \
+                and "searchText" not in post_data and "searchType" not in post_data:
+            return {
+                    'msg': "Please complete required field.",
+                    'status': "forbidden"
+                }
+        tpl = []
+        searchText = post_data['searchText']
+        searchType = post_data['searchType']
+        collection = self.database.public_breach_content
+        s = collection.find({searchType: {"$regex": searchText}}, {'_id': False, 'breach_content_id': True}).limit(300)
+        content_id = ""
+        already_check = []
+        for element in s:
+            content_id = element['breach_content_id']
+            if content_id not in already_check:
+                already_check.append(content_id)
+                s = collection.find({'breach_content_id': content_id}, {'_id': False, 'breach_content_id': False, 'breach_file': False, 'created_at': False, 'updated_at': False}).limit(300)
+                if s.count() > 0:
+                    tpl.append(list(s))
+        return {
+            'status': 'success',
+            'msg': '',
+            'results': list(tpl)
+        }
+
 
     def select_module(self, by="module_name", search="", limit=1):
         collection = self.database.modules

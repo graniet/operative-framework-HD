@@ -175,5 +175,15 @@ def select_project_task_unique():
     return jsonify(db.select_project_task_unique(post_data=request.get_json()))
 
 
+@app.route('/breach/informations', methods=['POST'])
+def breach_information():
+    return jsonify(db.breach_information(post_data=request.get_json()))
+
+
+@app.route('/breach/search', methods=['POST'])
+def breach_search():
+    return jsonify(db.breach_search(post_data=request.get_json()))
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=config.BACKEND_PORT)

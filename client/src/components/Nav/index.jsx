@@ -144,7 +144,7 @@ export class NavProject extends React.Component{
                     <Link to={"/"} style={listLiMain2}>
                         <i className="far fa-comment"></i> Notes
                     </Link>
-                    <Link to={"/"} style={listLiMain2}>
+                    <Link to={"/project/"+this.state.project_id+"/breach"} style={listLiMain2}>
                         <i className="fab fa-searchengin"></i> Public breach
                     </Link>
                 </ul>
