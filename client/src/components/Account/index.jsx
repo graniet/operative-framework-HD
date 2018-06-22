@@ -1,9 +1,9 @@
 import React from "react";
-import EngineUsers from "../Database/Engine/Users/index"
-import Tree from 'react-d3-tree';
 import styled from "styled-components"
 import Message from '../Message'
 import axios from 'axios'
+import Config from '../Config'
+
 import { Redirect } from 'react-router-dom'
 
 
@@ -19,10 +19,8 @@ const Screen = styled.div`
         
 `;
 
-const containerStyles = {
-    width: '100%',
-    height: '100vh',
-};
+const SERVER_ADDR = Config();
+
 
 export class Login extends React.Component{
 
@@ -52,7 +50,7 @@ export class Login extends React.Component{
     }
 
     handleSubmitForm(e){
-        axios.post("http://127.0.0.1:5000/auth/user/login", {"u_name": this.state.user_name, "u_password": this.state.user_password})
+        axios.post(SERVER_ADDR +"/auth/user/login", {"u_name": this.state.user_name, "u_password": this.state.user_password})
             .then(res => {
                 if(res.data.auth_token !== undefined && res.data.status === "success"){
                     localStorage.clear();
