@@ -19,6 +19,20 @@ $ db.createUser({user: 'operative', pwd:'operative', roles: [ "readWrite", "dbAd
 ```
 For security restart now mongoDB with --auth argument
 
+#### Update client configuration for backend interaction :
+
+folder: /client/src/components/Config/index.jsx
+
+```javascript
+let config = {
+        'protocol': 'http://',
+        'server':'127.0.0.1',
+        'port': '5000',
+    };
+
+```
+
+
 #### Install manually a operative framework HD
 ```
 $ sudo pip install -r requirements.txt
