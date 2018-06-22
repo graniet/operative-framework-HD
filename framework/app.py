@@ -176,4 +176,4 @@ def select_project_task_unique():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=config.BACKEND_PORT)
+    app.run(debug=True, host='0.0.0.0', port=config.BACKEND_PORT)
