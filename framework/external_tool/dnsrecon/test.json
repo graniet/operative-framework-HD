@@ -1,0 +1,108 @@
+[
+    {
+        "arguments": "dnsrecon.py -d vfeed.io -j test.json",
+        "date": "2018-06-21 12:20:46.377919",
+        "type": "ScanInfo"
+    },
+    {
+        "Version": "",
+        "address": "216.69.185.16",
+        "recursive": "True",
+        "target": "ns31.domaincontrol.com",
+        "type": "NS"
+    },
+    {
+        "Version": "",
+        "address": "2607:f208:206::10",
+        "recursive": "True",
+        "target": "ns31.domaincontrol.com",
+        "type": "NS"
+    },
+    {
+        "Version": "",
+        "address": "173.201.73.16",
+        "recursive": "True",
+        "target": "ns32.domaincontrol.com",
+        "type": "NS"
+    },
+    {
+        "Version": "",
+        "address": "2603:5:2291::10",
+        "recursive": "True",
+        "target": "ns32.domaincontrol.com",
+        "type": "NS"
+    },
+    {
+        "address": "72.167.238.29",
+        "exchange": "smtp.secureserver.net",
+        "type": "MX"
+    },
+    {
+        "address": "68.178.213.37",
+        "exchange": "smtp.secureserver.net",
+        "type": "MX"
+    },
+    {
+        "address": "68.178.213.203",
+        "exchange": "smtp.secureserver.net",
+        "type": "MX"
+    },
+    {
+        "address": "68.178.213.244",
+        "exchange": "mailstore1.secureserver.net",
+        "type": "MX"
+    },
+    {
+        "address": "72.167.238.32",
+        "exchange": "mailstore1.secureserver.net",
+        "type": "MX"
+    },
+    {
+        "address": "68.178.213.243",
+        "exchange": "mailstore1.secureserver.net",
+        "type": "MX"
+    },
+    {
+        "address": "184.168.131.233",
+        "name": "vfeed.io",
+        "type": "A"
+    },
+    {
+        "name": "vfeed.io",
+        "strings": "v=spf1 include:spf.protection.outlook.com -all",
+        "type": "TXT"
+    },
+    {
+        "name": "vfeed.io",
+        "strings": "MS=ms60318253",
+        "type": "TXT"
+    },
+    {
+        "address": "52.112.194.75",
+        "name": "_sipfederationtls._tcp.vfeed.io",
+        "port": "5061",
+        "target": "sipfed.online.lync.com",
+        "type": "SRV"
+    },
+    {
+        "address": "2603:1027:0:9::b",
+        "name": "_sipfederationtls._tcp.vfeed.io",
+        "port": "5061",
+        "target": "sipfed.online.lync.com",
+        "type": "SRV"
+    },
+    {
+        "address": "52.112.194.75",
+        "name": "_sip._tls.vfeed.io",
+        "port": "443",
+        "target": "sipdir.online.lync.com",
+        "type": "SRV"
+    },
+    {
+        "address": "2603:1027:0:3::b",
+        "name": "_sip._tls.vfeed.io",
+        "port": "443",
+        "target": "sipdir.online.lync.com",
+        "type": "SRV"
+    }
+]

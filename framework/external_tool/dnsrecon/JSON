@@ -1,0 +1,220 @@
+[
+    {
+        "arguments": "execute.py -d linkedin.com -j JSON",
+        "date": "2018-06-23 11:22:31.915030",
+        "type": "ScanInfo"
+    },
+    {
+        "Version": "9.10.5-P3.",
+        "address": "204.13.251.43",
+        "recursive": "True",
+        "target": "ns4.p43.dynect.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "198.51.44.73",
+        "recursive": "True",
+        "target": "dns3.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "2620:4d:4000:6259:7::90",
+        "recursive": "True",
+        "target": "dns3.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "9.10.5-P3.",
+        "address": "208.78.71.43",
+        "recursive": "True",
+        "target": "ns3.p43.dynect.net",
+        "type": "NS"
+    },
+    {
+        "Version": "9.10.5-P3.",
+        "address": "2001:500:94:1::43",
+        "recursive": "True",
+        "target": "ns3.p43.dynect.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "198.51.44.9",
+        "recursive": "True",
+        "target": "dns1.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "2620:4d:4000:6259:7::9",
+        "recursive": "True",
+        "target": "dns1.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "198.51.45.73",
+        "recursive": "True",
+        "target": "dns4.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "2a00:edc0:6259:7::90",
+        "recursive": "True",
+        "target": "dns4.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "198.51.45.9",
+        "recursive": "True",
+        "target": "dns2.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "aeb4abb25",
+        "address": "2a00:edc0:6259:7::9",
+        "recursive": "True",
+        "target": "dns2.p09.nsone.net",
+        "type": "NS"
+    },
+    {
+        "Version": "9.10.5-P3.",
+        "address": "204.13.250.43",
+        "recursive": "True",
+        "target": "ns2.p43.dynect.net",
+        "type": "NS"
+    },
+    {
+        "Version": "9.10.5-P3.",
+        "address": "208.78.70.43",
+        "recursive": "True",
+        "target": "ns1.p43.dynect.net",
+        "type": "NS"
+    },
+    {
+        "Version": "9.10.5-P3.",
+        "address": "2001:500:90:1::43",
+        "recursive": "True",
+        "target": "ns1.p43.dynect.net",
+        "type": "NS"
+    },
+    {
+        "address": "108.174.6.215",
+        "exchange": "mail-d.linkedin.com",
+        "type": "MX"
+    },
+    {
+        "address": "108.174.0.215",
+        "exchange": "mail-a.linkedin.com",
+        "type": "MX"
+    },
+    {
+        "address": "108.174.0.215",
+        "exchange": "mail.linkedin.com",
+        "type": "MX"
+    },
+    {
+        "address": "108.174.3.215",
+        "exchange": "mail-c.linkedin.com",
+        "type": "MX"
+    },
+    {
+        "address": "2620:109:c003:104::215",
+        "exchange": "mail-d.linkedin.com",
+        "type": "MX"
+    },
+    {
+        "address": "2620:119:50c0:207::215",
+        "exchange": "mail-a.linkedin.com",
+        "type": "MX"
+    },
+    {
+        "address": "108.174.10.10",
+        "name": "linkedin.com",
+        "type": "A"
+    },
+    {
+        "address": "2620:109:c002::6cae:a0a",
+        "name": "linkedin.com",
+        "type": "AAAA"
+    },
+    {
+        "strings": "v=spf1 ip4:199.101.162.0/25 ip4:108.174.3.0/24 ip4:108.174.6.0/24 ip4:108.174.0.0/24 ip6:2620:109:c00d:104::/64 ip6:2620:109:c006:104::/64 ip6:2620:109:c003:104::/64 ip6:2620:119:50c0:207::/64 ip4:199.101.161.130 mx mx:docusign.net ~all",
+        "type": "SPF"
+    },
+    {
+        "name": "linkedin.com",
+        "strings": "docusign=11f01284-dffc-40f9-8d56-57e5261ede3f",
+        "type": "TXT"
+    },
+    {
+        "name": "linkedin.com",
+        "strings": "448e0dc03e935ecf66d81f1ce3c26b2f2fea13756c031ffc4be91749107f3a79",
+        "type": "TXT"
+    },
+    {
+        "name": "linkedin.com",
+        "strings": "v=spf1 ip4:199.101.162.0/25 ip4:108.174.3.0/24 ip4:108.174.6.0/24 ip4:108.174.0.0/24 ip6:2620:109:c00d:104::/64 ip6:2620:109:c006:104::/64 ip6:2620:109:c003:104::/64 ip6:2620:119:50c0:207::/64 ip4:199.101.161.130 mx mx:docusign.net ~all",
+        "type": "TXT"
+    },
+    {
+        "address": "216.52.18.142",
+        "name": "_sip._tcp.linkedin.com",
+        "port": "5060",
+        "target": "external.linkedin.com",
+        "type": "SRV"
+    },
+    {
+        "address": "216.52.18.142",
+        "name": "_sips._tcp.linkedin.com",
+        "port": "5061",
+        "target": "external.linkedin.com",
+        "type": "SRV"
+    },
+    {
+        "address": "216.52.18.142",
+        "name": "_sip._udp.linkedin.com",
+        "port": "5060",
+        "target": "external.linkedin.com",
+        "type": "SRV"
+    },
+    {
+        "address": "216.52.18.142",
+        "name": "_sipfederationtls._tcp.linkedin.com",
+        "port": "5061",
+        "target": "external.linkedin.com",
+        "type": "SRV"
+    },
+    {
+        "address": "216.52.18.142",
+        "name": "_sip._tls.linkedin.com",
+        "port": "443",
+        "target": "external.linkedin.com",
+        "type": "SRV"
+    },
+    {
+        "address": "no_ip",
+        "name": "_xmpp-server._tcp.linkedin.com",
+        "port": "5269",
+        "target": "nsg7-uc-cup01.linkedin.biz",
+        "type": "SRV"
+    },
+    {
+        "address": "185.63.145.5",
+        "name": "_carddavs._tcp.linkedin.com",
+        "port": "443",
+        "target": "carddav.linkedin.com",
+        "type": "SRV"
+    },
+    {
+        "address": "2a05:f500:10:101::b93f:9105",
+        "name": "_carddavs._tcp.linkedin.com",
+        "port": "443",
+        "target": "carddav.linkedin.com",
+        "type": "SRV"
+    }
+]
