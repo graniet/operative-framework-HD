@@ -2,6 +2,7 @@
 
 from colorama import Fore, Style
 
+
 class ExternalTools(object):
 
     def __init__(self):
@@ -10,6 +11,11 @@ class ExternalTools(object):
                 'Author': 'aboul3la',
                 'Name': 'Sublist3r',
                 'Description': 'Fast subdomains enumeration tool for penetration testers'
+            },
+            {
+                'Author': 'darkoperator',
+                'Name': 'dnsrecon',
+                'Description': 'DNS Enumeration Script'
             }
         ]
 
