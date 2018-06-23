@@ -44,6 +44,9 @@ $ cd bin
 $ sudo ./opf_users.py
 $ create operative mypass
 $ cd ..
+$ cd framework/
+$ python load_modules.py
+$ cd ..
 open two shell
 1) $ sudo python framework/app.py
 2) $ cd client && npm start
