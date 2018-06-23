@@ -1,11 +1,14 @@
 pythonwhois==2.4.3
 dicttoxml==1.7.4
+lxml==4.2.1
+win_unicode_console==0.5
 Flask==1.0.2
+netaddr==0.7.19
 pymongo==3.6.1
-python_nmap==0.6.1
+nmap==0.0.1
 requests==2.18.4
 colorama==0.3.9
 beautifulsoup4==4.6.0
+core==1.0.1
 dnspython==1.15.0
-nmap==0.0.1
-win_unicode_console==0.5
+pybonjour==1.1.1
