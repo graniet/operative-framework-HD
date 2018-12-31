@@ -67,20 +67,3 @@ $ python load_modules.py
 $ sudo opf_users
 opf_users > create operative Op3r4tIv3P$$SS
 ```
-
-#### run operative framework without console
-first shell:
-```
-$ sudo opf_server
-```
-second shell:
-```
-$ sudo opf_client
-```
-
-#### run operative framework with console
-```
-$ sudo opf_console
-$ opf_console > run_server
-$ opf_console > run_client
-```
