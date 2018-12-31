@@ -27,8 +27,8 @@ $ git clone https://github.com/graniet/operative-framework-HD.git
 $ cd operative-framework-HD
 $ chmod +x install.sh
 $ ./install.sh
-$ cd client && npm start
-$ cd framework && python load_modules.py && cd ../
+$ cd client/ && npm install && npm start
+$ cd framework/ && python load_modules.py && cd ../
 ```
 
 
