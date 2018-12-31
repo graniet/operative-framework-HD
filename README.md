@@ -8,8 +8,8 @@
 
 You need this packages
 + mongoDB
-+ NPM
-+ Python 2
++ Node & NPM
++ Python
 
 #### Create mongoDB database 
 ```
@@ -19,21 +19,20 @@ $ db.createUser({user: 'operative', pwd:'operative', roles: [ "readWrite", "dbAd
 ```
 For security restart now mongoDB with --auth argument
 
-#### Update client configuration for backend interaction :
 
-folder: /client/src/components/Config/index.jsx
-
-```javascript
-let config = {
-        'protocol': 'http://',
-        'server':'127.0.0.1',
-        'port': '5000',
-    };
-
+#### Install globally a operative framework HD
+```
+$ apt-get install nodejs
+$ git clone https://github.com/graniet/operative-framework-HD.git
+$ cd operative-framework-HD
+$ chmod +x install.sh
+$ ./install.sh
+$ cd client && npm start
+$ cd framework && python load_modules.py && cd ../
 ```
 
 
-#### Install manually a operative framework HD
+#### Or install manually a operative framework HD
 ```
 $ sudo pip install -r requirements.txt
 $ sudo python framework/load_modules.py
@@ -52,18 +51,22 @@ open two shell
 2) $ cd client && npm start
 ```
 
-#### Install globally a operative framework HD
-```
-$ git clone https://github.com/graniet/operative-framework-HD.git
-$ cd operative-framework-HD
-$ chmod +x install.sh
-$ ./install.sh
-$ cd framework
-$ python load_modules.py 
-```
-
 #### create first user
 ```
 $ sudo opf_users
 opf_users > create operative Op3r4tIv3P$$SS
+```
+
+
+#### (If you have a problem) Update client configuration for backend interaction :
+
+folder: /client/src/components/Config/index.jsx
+
+```javascript
+let config = {
+        'protocol': 'http://',
+        'server':'127.0.0.1',
+        'port': '5000',
+    };
+
 ```
