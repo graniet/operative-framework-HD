@@ -9,6 +9,7 @@ import random
 import hashlib
 import subprocess
 import datetime
+from colorama import Fore, Style
 from pymongo import MongoClient, DESCENDING, errors
 from engine import display, session
 from dicttoxml import dicttoxml
@@ -29,9 +30,11 @@ except:
 class Engine(object):
 
     def __init__(self, hostname, port):
+        print datetime.datetime.today().strftime('[%Y-%m-%d %H:%M:%S] ') + "Please wait loading it may take time...."
+        print Fore.YELLOW + datetime.datetime.today().strftime('[%Y-%m-%d %H:%M:%S] ') + "make sure you have launched mongodb with --auth parameter" + Style.RESET_ALL
         self.client = MongoClient('mongodb://'+str(config.MONGODB_USER)+':'+str(config.MONGODB_PASS)+'@'+str(config.MONGODB_HOST)+':'+str(config.MONGODB_PORT)+'/tracking?authSource=operative_framework')
         if not self.random_query():
-            sys.exit('Please configure/start correctly MongoDB database with --auth.')
+            sys.exit(datetime.datetime.today().strftime('[%Y-%m-%d %H:%M:%S] ') + 'Please configure/start correctly MongoDB database with --auth.')
         self.database = self.client.operative_framework
         self.default_module_tpl = {
             "_id": False,

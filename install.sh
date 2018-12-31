@@ -10,12 +10,6 @@ mkdir ~/.operative_framework
 echo -e "Moving framework, client folder to '${YELLOW}~/.operative_framework${COLOR_OFF}' ..."
 cp -R framework/ ~/.operative_framework/framework
 cp -R client/ ~/.operative_framework/client
-cp bin/opf_client.py /usr/local/bin/opf_client
-echo -e "binary copied ${GREEN} /usr/local/bin/opf_client ${COLOR_OFF}"
-cp bin/opf_console.py /usr/local/bin/opf_console
-echo -e "binary copied ${GREEN} /usr/local/bin/opf_console ${COLOR_OFF}"
-cp bin/opf_server.py /usr/local/bin/opf_server
-echo -e "binary copied ${GREEN} /usr/local/bin/opf_single ${COLOR_OFF}"
 cp bin/opf_single.py /usr/local/bin/opf_single
 echo -e "binary copied ${GREEN} /usr/local/bin/opf_single ${COLOR_OFF}"
 cp bin/opf_importer.py /usr/local/bin/opf_importer
@@ -25,6 +19,7 @@ echo -e "binary copied ${GREEN} /usr/local/bin/opf_users ${COLOR_OFF}"
 echo "operative framework binary copied."
 echo -e "${YELLOW}installation${COLOR_OFF} of ${YELLOW}python${COLOR_OFF} dependency ..."
 pip install -r requirements.txt
-echo -e "${YELLOW}installation${COLOR_OFF} of ${YELLOW}react.js${COLOR_OFF} dependency ..."
-npm install --prefix "~/.operative_framework/client/"
-echo -e "${GREEN}Installation successfully terminated,  start cmd 'opf_console' from new shell.${COLOR_OFF}"
+echo -e "${GREEN}Installation successfully terminated.${COLOR_OFF}"
+echo -e "${GREEN}1) open new shell: sudo mongod --auth .${COLOR_OFF}"
+echo -e "${GREEN}2) open new shell: sudo python framework/app.py .${COLOR_OFF}"
+echo -e "${GREEN}3) open new shell: cd client/ && npm install && npm start .${COLOR_OFF}"
