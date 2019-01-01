@@ -142,7 +142,7 @@ class OperativeBinary(object):
                         cmd = user_put.split(' ')
                         if cmd[0].strip() == "set":
                             if len(cmd) == 2 and "=" in cmd[1]:
-                                argument_v = cmd[1].split('=')
+                                argument_v = cmd[1].split('=', 1)
                                 self.set_argument(argument_v[0], argument_v[1])
                                 print Fore.GREEN + "=> " + Style.RESET_ALL + "command executed."
                             else:
