@@ -4,6 +4,7 @@ import sys
 from colorama import Fore, Style
 import os
 import glob
+import readline
 error = 0
 try:
     sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0])
