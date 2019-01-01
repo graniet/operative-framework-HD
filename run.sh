@@ -28,7 +28,7 @@ fi
 echo -e "${YELLOW}Running operative framework HD...${COLOR_OFF}"
 ps aux  |  grep -i "framework/app.py"  |  awk '{print $2}'  |  xargs sudo kill -9
 ps aux  |  grep -i "mongod --auth"  |  awk '{print $2}'  |  xargs sudo kill -9
-ps aux  |  grep -i "npm"  |  awk '{print $2}'  |  xargs sudo kill -9
+ps aux  |  grep -i "client/node_modules"  |  awk '{print $2}'  |  xargs sudo kill -9
 mongod --auth >/dev/null &
 echo y | npm --prefix 'client/' start &
 python framework/app.py >/dev/null &
