@@ -4,7 +4,10 @@ import sys
 from colorama import Fore, Style
 import os
 import glob
+from optparse import OptionParser
 import readline
+import json
+
 error = 0
 try:
     sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0])
@@ -28,6 +31,9 @@ class OperativeBinary(object):
         if error == 1:
             self.directory = os.path.expanduser('~') + "/.operative_framework"
         self.module_class = ""
+        self.export_json = False
+        self.verbose = True
+        self.json_dump = {}
         self.run()
 
     def module_lists(self):
@@ -112,14 +118,21 @@ class OperativeBinary(object):
 
     def run(self):
         if len(sys.argv) < 2:
-            self.print_help()
-        options = sys.argv[1]
-        if options == "--list":
+            print "use -h for help."
+            sys.exit()
+        parser = OptionParser(usage="usage: %prog [options] -u enterprise/linkedin_search -a enterprise=github -r", version="%prog 1.0")
+        parser.add_option("-l", "--list", action="store_false", dest="module_list", help="listing of module name.")
+        parser.add_option("-a", "--args", dest="module_argument", help="add arguments to module")
+        parser.add_option("-r", "--run", action="store_false", dest="module_run", help="run module")
+        parser.add_option("-u", "--use", dest="module_name", metavar="module_name", help="use specific module")
+        parser.add_option("-j", "--json", action="store_false", dest="export_json", help="print result to json")
+        (options, args) = parser.parse_args()
+        if options.module_list is not None:
             self.module_lists()
-        elif options == "--use" and len(sys.argv) == 3:
+        elif options.module_name is not None:
             if "/" not in sys.argv[2]:
                 print "please use correct format ex: --use website/whois_domain"
-                return False
+                sys.exit()
             module_base = sys.argv[2]
             module_name = sys.argv[2].split('/')[1]
             if os.path.isfile(self.directory + "/framework/engine/modules/" + module_name + ".py"):
@@ -131,8 +144,37 @@ class OperativeBinary(object):
                     return False
                 action = 0
                 self.module_class = module_class
+                if options.module_argument is not None:
+                    if ";" in options.module_argument:
+                        arguments_list = options.module_argument.split(';')
+                        for argument in arguments_list:
+                            if "=" in argument:
+                                argument_v = argument.split('=', 1)
+                                self.set_argument(argument_v[0], argument_v[1])
+                            else:
+                                print "format wrong please use : set argument=value"
+                                sys.exit()
+                    else:
+                        if "=" in options.module_argument:
+                            argument_v = options.module_argument.split('=', 1)
+                            self.set_argument(argument_v[0], argument_v[1])
+                        else:
+                            print "format wrong please use : set argument=value"
+                            sys.exit()
+                    if options.module_run is not None:
+                        self.execute()
+                        if options.export_json is None:
+                            self.export_raw()
+                        else:
+                            self.json_dump['informations'] = self.module_class.meta
+                            if hasattr(self.module_class.export, "__len__"):
+                                self.json_dump['results'] = self.module_class.export[0]
+                            else:
+                                self.json_dump['results'] = self.module_class.export
+                            print json.dumps(self.json_dump)
+                        return True
                 self.shell_help()
-                while action == 0:
+                while action == 0 and options.module_run is None:
                     user_put = raw_input('$ operative ('+Fore.YELLOW+module_base+ Style.RESET_ALL+') > ')
                     user_put = user_put.strip()
                     if user_put == "help":
@@ -162,5 +204,5 @@ class OperativeBinary(object):
 if __name__ == "__main__":
     try:
         OperativeBinary()
-    except:
+    except KeyboardInterrupt:
         print "\nbye..."
